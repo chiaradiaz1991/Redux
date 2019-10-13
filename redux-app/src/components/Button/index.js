@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCounter } from '../../store';
+import { addCounter, counterReset } from '../../store';
 
 class Button extends React.Component {
     handleClick() {
@@ -8,11 +8,19 @@ class Button extends React.Component {
 
         dispatch(addCounter());
     }
-render() {
-    return(
-        <button onClick={()=> this.handleClick()}>Sum</button>
-    )
-}
+
+    handleClickReset() {
+        const { dispatch } = this.props;
+        dispatch(counterReset());
+    }
+    render() {
+        return (
+            <div>
+                <button onClick={() => this.handleClick()}>Sum</button>
+                <button onClick={() => this.handleClickReset()}>Reset</button>
+            </div>
+        )
+    }
 }
 
 function mapStateToProps(props) {
