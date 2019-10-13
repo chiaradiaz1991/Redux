@@ -1,20 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addCounter } from './store';
+import Button from './components/Button/index';
 
 class App extends React.Component {
 
-  handleClick() {
-    const { dispatch }  = this.props;
-    dispatch(addCounter());
-  }
+
   render() {
     return (
       <div className="App">
         Counter: {this.props.counter} <br />
         mi nombre es: {this.props.test}
         <br />
-        <button onClick={() => this.handleClick()}>Sum</button>
+        <Button />
       </div>
     );
   }
