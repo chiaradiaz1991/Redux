@@ -57,7 +57,6 @@ export const reducer = (state = initialState, action) => {
                 }
                 return item
             })
-            console.log(4, updatedTasks)
             return Object.assign({}, state, {
                 tasks: updatedTasks
             })
