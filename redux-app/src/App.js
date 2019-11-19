@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from './components/Button/index';
+import AddTask from './components/AddTask/index';
+import Tasks from './components/Tasks/index';
+
 
 class App extends React.Component {
 
@@ -18,6 +21,9 @@ class App extends React.Component {
         }
         <br />
         <Button />
+        <br />
+        <AddTask />
+        <Tasks />
       </div>
     );
   }

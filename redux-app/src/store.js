@@ -3,7 +3,8 @@ import thunkMiddleWare from 'redux-thunk';
 
 const initialState = {
     counter: 0,
-    counterReset: 0
+    counterReset: 0,
+    tasks: []
 };
 
 //ACTIONS
@@ -19,7 +20,22 @@ export const counterReset = () => dispatch => {
     })
 }
 
+export const addTask = task => dispatch => {
+    return dispatch({
+      type: "ADD_TASK",
+      value: task
+    });
+  };
 
+  
+  export const removeTask = index => dispatch => {
+    return dispatch({
+      type: "REMOVE_TASK",
+      value: index
+    });
+  };  
+
+//reducer
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_COUNTER":
@@ -30,6 +46,17 @@ export const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 counterReset: state.counter = 0
             })
+        case "ADD_TASK":
+            return Object.assign({}, state, {
+                tasks: [...state.tasks, action.value]
+            })
+        case "REMOVE_TASK":
+            const newTasks = state.tasks.filter(
+                (item, index) => index !== action.value
+            );
+            return Object.assign({}, state, {
+                tasks: newTasks
+            });
         default:
             return state;
     }
