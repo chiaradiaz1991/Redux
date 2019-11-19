@@ -28,9 +28,9 @@ export const addTask = task => dispatch => {
   };
 
   
-  export const removeTask = index => dispatch => {
+  export const completeTask = index => dispatch => {
     return dispatch({
-      type: "REMOVE_TASK",
+      type: "COMPLETE_TASK",
       value: index
     });
   };  
@@ -48,15 +48,19 @@ export const reducer = (state = initialState, action) => {
             })
         case "ADD_TASK":
             return Object.assign({}, state, {
-                tasks: [...state.tasks, action.value]
+                tasks: [...state.tasks, {value: action.value, isComplete: false}]
             })
-        case "REMOVE_TASK":
-            const newTasks = state.tasks.filter(
-                (item, index) => index !== action.value
-            );
+        case "COMPLETE_TASK":
+            const updatedTasks = state.tasks.map((item, key)=>{
+                if (key == action.value) {
+                    item.isComplete= true
+                }
+                return item
+            })
+            console.log(4, updatedTasks)
             return Object.assign({}, state, {
-                tasks: newTasks
-            });
+                tasks: updatedTasks
+            })
         default:
             return state;
     }
